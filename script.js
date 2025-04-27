@@ -6,39 +6,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSlides = document.querySelectorAll('.slide').length;
 
     function showSlide(index) {
+      
         document.querySelector('.slide.active')?.classList.remove('active');
+     
         currentSlide = index;
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+        slides.style.transform = `translateX(-${currentSlide * 20}%)`;
+      
         document.querySelectorAll('.slide')[currentSlide].classList.add('active');
     }
 
     function nextSlide() {
         const nextIndex = (currentSlide + 1) % totalSlides;
-        showSlide(nextIndex);
+        window.showSlide(nextIndex);
     }
 
+   
     function prevSlide() {
         const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(prevIndex);
+        window.showSlide(prevIndex);
     }
-
     let intervalId = null;
     function startAutoSlide() {
-        intervalId = setInterval(nextSlide, 5000);
+        intervalId = setInterval(nextSlide, 5000); 
     }
-
     function stopAutoSlide() {
         if (intervalId) {
-            clearInterval(intervalId);
+            clearInterval(intervalId); 
         }
     }
+ 
+    window.showSlide = showSlide;
+    window.prevSlide = prevSlide;
+    window.nextSlide = nextSlide;
+    window.startAutoSlide = startAutoSlide;
+    window.stopAutoSlide = stopAutoSlide; 
 
+ 
     prevButton.addEventListener('click', prevSlide);
     nextButton.addEventListener('click', nextSlide);
 
+  
     startAutoSlide();
 });
-
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
