@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI-exercise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section>
+        <main>
+            <div class="carousel" id="carousel">
+                <div class="slides" id="slides">
+                    <div class="slide card">
+                        <figure>
+                            <img src="assets/spiritedaway.jpg" alt="Movie Poster 1" class="poster">
+                            <video class="trailer" loop muted controls>
+                                <source src="assets/spirited-away-trailer.mp4" type="video/mp4">
+                            </video>
+                        </figure>
+                        <div class="caption">
+                            <h2>Spirited Away</h2>
+                            <p>A magic journey into the spirit world</p>
+                        </div>
+                    </div>
+                    <div class="slide card">
+                        <figure>
+                            <img src="assets/arrietty.webp" alt="Movie Poster 2" class="poster">
+                            <video class="trailer" loop muted controls>
+                                <source src="assets/arrietty-trailer.mp4" type="video/mp4">
+                            </video>
+                        </figure>
+                        <div class="caption">
+                            <h2>Arrietty</h2>
+                            <p>A "little" girl Big life</p>
+                        </div>
+                    </div>
+                    <div class="slide card">
+                        <figure>
+                            <img src="assets/kiki.webp" alt="Movie Poster 3" class="poster">
+                            <video class="trailer" loop muted controls>
+                                <source src="assets/kiki-trailer.mp4" type="video/mp4">
+                            </video>
+                        </figure>
+                        <div class="caption">
+                            <h2>KIKI's Delivery Service</h2>
+                            <p>An enchanting witch grows up</p>
+                        </div>
+                    </div>
+                    <div class="slide card">
+                        <figure>
+                            <img src="assets/totoro.jpg" alt="Movie Poster 4" class="poster">
+                            <video class="trailer" loop muted controls>
+                                <source src="assets/totoro-trailer.mp4" type="video/mp4">
+                            </video>
+                        </figure>
+                        <div class="caption">
+                            <h2>My Neighbor Totoro</h2>
+                            <p>Imagination.Joy.Resilience</p>
+                        </div>
+                    </div>
+                    <div class="slide card">
+                        <figure>
+                            <img src="assets/howlscastle.jpg" alt="Movie Poster 5" class="poster">
+                            <video class="trailer" loop muted controls>
+                                <source src="assets/howl-trailer.mp4" type="video/mp4">
+                            </video>
+                        </figure>
+                        <div class="caption">
+                            <h2>Howl's Moving Castle</h2>
+                            <p>Family is what you make of it</p>
+                        </div>
+                    </div>
+                </div>
+                <button id="prev">&#10094;</button>
+                <button id="next">&#10095;</button>
+            </div>
+        </main>
+    </section>
+
+    <nav id="mainNav">
+        <img src="assets/menu-icon.png" alt="Menu" id="menuToggle" class="menu-icon">
+        <ul id="navLinks">
+            <li><a href="#">Visit</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Tickets</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="shop">
+        <h2>Studio Ghibli Shop</h2>
+        <div class="shop-items">
+            <div class="shop-item">
+                <img src="assets/001.jpg" alt="Totoro Plush">
+                <h3>Item 1</h3>
+                <p class="price">$29.99</p>
+                <button class="add-to-cart" data-id="1">Add to Cart</button>
+            </div>
+            <div class="shop-item">
+                <img src="assets/002.jpg" alt="Spirited Away Poster">
+                <h3>Item 2</h3>
+                <p class="price">$19.99</p>
+                <button class="add-to-cart" data-id="2">Add to Cart</button>
+            </div>
+            <div class="shop-item">
+                <img src="assets/003.jpg" alt="Howl's Moving Castle Jacket">
+                <h3>Item 3</h3>
+                <p class="price">$89.99</p>
+                <button class="add-to-cart" data-id="3">Add to Cart</button>
+            </div>
+            <div class="shop-item">
+                <img src="assets/004.jpg" alt="Kiki's Broom">
+                <h3>Item 4</h3>
+                <p class="price">$49.99</p>
+                <button class="add-to-cart" data-id="4">Add to Cart</button>
+            </div>
+            <div class="shop-item">
+                <img src="assets/032.jpg" alt="Item 5">
+                <h3>Item 5</h3>
+                <p class="price">$39.99</p>
+                <button class="add-to-cart" data-id="5">Add to Cart</button>
+            </div>
+            <div class="shop-item">
+                <img src="assets/036.jpg" alt="Item 6">
+                <h3>Item 6</h3>
+                <p class="price">$69.99</p>
+                <button class="add-to-cart" data-id="6">Add to Cart</button>
+            </div>
+        </div>
+        <div id="cart">
+            <h3>Shopping Cart</h3>
+            <ul id="cart-items"></ul>
+            <p id="total">Total: $0.00</p>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </section>
+
+    <section id="registration">
+        <form id="registrationform">
+            <h2>Visit us at Ghibli Park</h2>
+            <div class="form-group">
+                <label for="date-of-visit">When would you like to visit?</label>
+                <input type="date" id="date-of-visit" name="date-of-visit">
+                <span class="error" id="visitDateError"></span>
+            </div>
+            <div class="form-group">
+                <label for="no-of-visitors">How many are coming?</label>
+                <select id="no-of-visitors" name="no-of-visitors">
+                    <option value="">Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <span class="error" id="visitorsError"></span>
+            </div>
+            <div class="form-group">
+                <label for="name">Your Full Name:</label>
+                <input type="text" id="name" name="name">
+                <span class="error" id="nameError"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email Address:</label>
+                <input type="email" id="email" name="email">
+                <span class="error" id="emailError"></span>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+                <span class="error" id="dobError"></span>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <span class="error" id="genderError"></span>
+            </div>
+            <div class="form-group">
+                <label for="ticket">Ticket Type:</label>
+                <select id="ticket" name="ticket">
+                    <option value="">Select</option>
+                    <option value="adult">Adult</option>
+                    <option value="child">Child</option>
+                </select>
+                <span class="error" id="ticketError"></span>
+            </div>
+            <div class="form-group">
+                <label for="comments">Additional Comments:</label>
+                <textarea id="comments" name="comments"></textarea>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
