@@ -252,7 +252,13 @@ input, select, textarea {
 .shop-item button:hover {
     background-color: #4CAF50;
 }
+#checkoutWindow {
+    display: none;
+}
 
+#checkoutWindow.active {
+    display: flex;
+}
 #cart {
     margin-top: 30px;
     background-color: rgba(255, 255, 255, 0.1);

@@ -6,13 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSlides = document.querySelectorAll('.slide').length;
 
     function showSlide(index) {
-      
         document.querySelector('.slide.active')?.classList.remove('active');
-     
         currentSlide = index;
-      
         slides.style.transform = `translateX(-${currentSlide * 20}%)`;
-      
         document.querySelectorAll('.slide')[currentSlide].classList.add('active');
     }
 
@@ -21,11 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
         window.showSlide(nextIndex);
     }
 
-   
     function prevSlide() {
         const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
         window.showSlide(prevIndex);
     }
+
     let intervalId = null;
     function startAutoSlide() {
         intervalId = setInterval(nextSlide, 5000); 
@@ -35,20 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(intervalId); 
         }
     }
- 
+
     window.showSlide = showSlide;
     window.prevSlide = prevSlide;
     window.nextSlide = nextSlide;
     window.startAutoSlide = startAutoSlide;
     window.stopAutoSlide = stopAutoSlide; 
 
- 
     prevButton.addEventListener('click', prevSlide);
     nextButton.addEventListener('click', nextSlide);
 
-  
     startAutoSlide();
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
@@ -187,10 +182,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     checkoutBtn.addEventListener('click', function() {
         if (cart.length > 0) {
+            // 创建结算窗口
+            const checkoutWindow = document.createElement('div');
+            checkoutWindow.id = 'checkoutWindow';
+            checkoutWindow.style.position = 'fixed';
+            checkoutWindow.style.top = '0';
+            checkoutWindow.style.left = '0';
+            checkoutWindow.style.width = '100%';
+            checkoutWindow.style.height = '100%';
+            checkoutWindow.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            checkoutWindow.style.zIndex = '1000';
+            checkoutWindow.style.display = 'flex';
+            checkoutWindow.style.justifyContent = 'center';
+            checkoutWindow.style.alignItems = 'center';
+
+            const checkoutContent = document.createElement('div');
+            checkoutContent.style.backgroundColor = 'white';
+            checkoutContent.style.padding = '30px';
+            checkoutContent.style.borderRadius = '10px';
+            checkoutContent.style.maxWidth = '600px';
+            checkoutContent.style.width = '80%';
+
             const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
-            alert(`Thank you for your purchase! You have bought ${cart.length} items for a total of $${totalAmount.toFixed(2)}.`);
-            cart.length = 0;
-            updateCart();
+            checkoutContent.innerHTML = `
+                <h3>Thank you for your purchase!</h3>
+                <p>You have bought ${cart.length} goods for a total of $${totalAmount.toFixed(2)}.</p>
+                <ul style="margin-top: 20px;">
+                    ${cart.map(item => `<li>${item.name} - $${item.price.toFixed(2)}</li>`).join('')}
+                </ul>
+                <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                    <button id="closeCheckout" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+                </div>
+            `;
+
+            checkoutWindow.appendChild(checkoutContent);
+            document.body.appendChild(checkoutWindow);
+
+            // 添加关闭按钮事件
+            const closeCheckout = checkoutContent.querySelector('#closeCheckout');
+            closeCheckout.addEventListener('click', function() {
+                document.body.removeChild(checkoutWindow);
+                cart.length = 0;
+                updateCart();
+            });
         } else {
             alert('Your cart is empty!');
         }
